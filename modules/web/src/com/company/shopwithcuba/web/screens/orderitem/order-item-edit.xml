@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.shopwithcuba.web.screens.orderitem">
+    <data>
+        <instance id="orderItemDc"
+                  class="com.company.shopwithcuba.entity.OrderItem"
+                  view="orderItem-view">
+            <loader/>
+            <instance id="productDc" property="product"/>
+        </instance>
+        <collection id="orderDc"
+                    class="com.company.shopwithcuba.entity.Order"
+                    view="order-view">
+            <loader id="orderItemsDl">
+                <query>
+                    <![CDATA[select e from shopwithcuba_Order e]]>
+                </query>
+            </loader>
+        </collection>
+
+    </data>
+
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" >
+            <column width="250px">
+                <pickerField dataContainer="orderItemDc" id="productField" property="product">
+                    <actions>
+                        <action id="open_composition" type="picker_open_composition"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField dataContainer="orderItemDc" id="counterField" property="counter"/>
+                <pickerField dataContainer="orderItemDc" id="numberOrder" property="numberOrder">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

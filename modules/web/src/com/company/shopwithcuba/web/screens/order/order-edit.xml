@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.shopwithcuba.web.screens.order">
+    <data>
+<!--        <keyValueCollection id="clientDc" >-->
+<!--            <loader id="clientsDl">-->
+<!--                <query><![CDATA[select e from shopwithcuba_Client e]]></query>-->
+<!--            </loader>-->
+<!--            <properties>-->
+<!--                <property datatype="string" name="full_name"></property>-->
+<!--            </properties>-->
+<!--        </keyValueCollection>-->
+        <instance id="orderDc"
+                  class="com.company.shopwithcuba.entity.Order"
+                  view="order-view">
+            <loader/>
+        </instance>
+        <collection id="clientDc"
+                    class="com.company.shopwithcuba.entity.Client"
+        view="client-view">
+            <loader id="clientsDl">
+                <query>
+                    <![CDATA[select e from shopwithcuba_Client e]]>
+                </query>
+            </loader>
+        </collection>
+
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="orderDc">
+            <column width="250px">
+                <textField id="numberOrderField" property="numberOrder"/>
+                <textField id="priceField" property="price"/>
+                <lookupField id="clientField" optionsContainer="clientDc" property="client" captionProperty="fullName"/>
+
+            </column>
+        </form>
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
